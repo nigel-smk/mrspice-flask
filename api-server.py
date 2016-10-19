@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 from model import Ingredient
 import json
 import os
@@ -10,7 +10,11 @@ qs = QueryService()
 def ingredient_query():
     ingredients = [Ingredient(param) for param in request.args.getlist('ingredient')]
     pairings = qs.get_ranked_pairings(*ingredients)
-    return json.dumps(pairings)
+    data = json.dumps(pairings)
+    response = Response(response=data,
+                        status=200,
+                        mimetype="application/json")
+    return response
 
 if __name__ == '__main__':
     app.debug = True
