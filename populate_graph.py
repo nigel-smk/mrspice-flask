@@ -6,8 +6,8 @@ url = 'mongodb://localhost:27017/'
 username = ''
 password = ''
 
-totalLimit = 1
-pageLimit = 1
+totalLimit = 50000
+pageLimit = 10
 graphed = 0
 
 client = MongoClient(url)
@@ -18,7 +18,7 @@ db = client.yummly
 
 collection = db.recipes
 
-#reset_graph()
+reset_graph()
 
 start_time = time.time()
 
@@ -28,13 +28,13 @@ while graphed < totalLimit:
 
         web_id = result['id']
         recipeName = result['recipeName']
-        recipe = Recipe(id=web_id, )
+        recipe = Recipe(id=web_id)
 
         ingredients = []
         for ingredient_result in result['ingredients']:
             ingredients.append(Ingredient(name=ingredient_result))
 
-        #adds recipe and ingredients to graph
+        recipe.add()
         recipe.require_ingredients(ingredients)
 
     graphed += pageLimit

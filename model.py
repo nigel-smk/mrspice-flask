@@ -24,9 +24,9 @@ def get_all_recipes_require_ingredient_counts(*wheres):
     for where in wheres:
         query += "(r:Recipe)-[:REQUIRES]->(:Ingredient{{name:'{0}'}}), ".format(where.node['name'])
     query += "(i:Ingredient)<-[:REQUIRES]-(r:Recipe) RETURN i.name AS name, count(r) AS total"
-    cursor = graph.run(query)
+    recordList = graph.cypher.execute(query)
     #dictionary comprehension
-    return { record['name']: record['total'] for record in cursor }
+    return { record['name']: record['total'] for record in recordList }
 
 #classes for manipulating nodes
 class Recipe:
@@ -40,18 +40,14 @@ class Recipe:
         return self.node
 
     def find(self):
-        recipe = graph.find_one('Recipe', 'id', **dict(self.node))
+        recipe = graph.find_one('Recipe', self.node.__primarykey__, self.node[self.node.__primarykey__])
         if recipe:
             self.node = recipe
         return recipe
 
     def add(self):
-        if not self.find():
-            graph.create(self.node)
-            self.node = recipe
-            return True
-        else:
-            return False
+        self.node = graph.merge_one(self.node.__primarylabel__, self.node.__primarykey__, self.node[self.node.__primarykey__])
+        return self.node
 
     def merge(self):
         graph.merge(self.node, 'Recipe', self.node[self.node.__primarykey__])
@@ -61,10 +57,10 @@ class Recipe:
         graph.create(rel)
 
     def require_ingredients(self, ingredients):
-        subgraph = copy.copy(self.node)
         for ingredient in ingredients:
-            subgraph |= Relationship(self.node, 'REQUIRES', ingredient.node)
-        graph.merge(subgraph)
+            iNode = ingredient.add()
+            rel = Relationship(self.node, 'REQUIRES', iNode)
+            graph.create_unique(rel)
 
     def get_meta_data(self):
         #retrieve metadata from mongo
@@ -99,18 +95,14 @@ class Ingredient:
         return not self.find()
 
     def find(self):
-        ingredient = graph.find_one('Ingredient', **dict(self.node))
+        ingredient = graph.find_one('Ingredient', self.node.__primarykey__, self.node[self.node.__primarykey__])
         if ingredient:
             self.node = ingredient
         return ingredient
 
     def add(self):
-        if not self.find():
-            graph.create(self.node)
-            self.node = ingredient
-            return True
-        else:
-            return False
+        self.node = graph.merge_one(self.node.__primarylabel__, self.node.__primarykey__, self.node[self.node.__primarykey__])
+        return self.node
 
     def merge(self):
         graph.merge(self.node, 'Ingredient', self.node[self.node.__primarykey__])
