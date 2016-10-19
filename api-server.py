@@ -1,6 +1,7 @@
 from flask import Flask, request
 from model import Ingredient
 import json
+import os
 from query_service import QueryService
 app = Flask(__name__)
 qs = QueryService()
@@ -13,4 +14,5 @@ def ingredient_query():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
