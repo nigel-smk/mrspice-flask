@@ -1,6 +1,7 @@
 from model import Ingredient, Recipe, get_all_recipes_require_ingredient_counts
 import time
 
+
 class QueryService:
 
     def __init__(self):
@@ -10,6 +11,9 @@ class QueryService:
     Return a list of ingredients and their pairing value
     '''
     def get_ranked_pairings(self, *ingredients):
+        if not ingredients:
+            return self.get_initial_recommendations()
+
         pairings = []
 
         single_counts = self.get_counts()
@@ -58,6 +62,11 @@ class QueryService:
 
         return self.cache.get(key)
 
+    #TODO create separate route for initial recommendations?
+    def get_initial_recommendations(self):
+        counts = self.get_counts()
+        ranked = [{'ingredient': key, 'rank': counts[key]} for key in counts]
+        return sorted(ranked, key=lambda rank: rank['rank'], reverse=True)
 
 if __name__ == '__main__':
     qs = QueryService()

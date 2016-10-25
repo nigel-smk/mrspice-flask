@@ -1,10 +1,13 @@
 from flask import Flask, request, Response
+from flask_cors import CORS, cross_origin
 from model import Ingredient
 import json
 import os
 from query_service import QueryService
 app = Flask(__name__)
+cors = CORS(app, origins='http://localhost:8100')
 qs = QueryService()
+
 
 @app.route('/matches', methods=['GET'])
 def ingredient_query():
