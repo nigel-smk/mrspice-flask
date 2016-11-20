@@ -2,8 +2,8 @@ from py2neo import Graph, Node, Relationship, Subgraph
 import os
 import copy
 
-#url = os.environ.get('GRAPHENEDB_URL', 'http://neo4j:tim54p4MS@localhost:7474/db/data')
-url = os.environ.get('GRAPHENEDB_URL', 'http://mrspice:ZakHDJjiV7xXj2WRHFwv@hobby-cpeliffpoeaggbkeanfikgol.dbs.graphenedb.com:24789/db/data/')
+url = os.environ.get('GRAPHENEDB_URL', 'http://neo4j:tim54p4MS@localhost:7474/db/data')
+#url = os.environ.get('GRAPHENEDB_URL', 'http://mrspice:ZakHDJjiV7xXj2WRHFwv@hobby-cpeliffpoeaggbkeanfikgol.dbs.graphenedb.com:24789/db/data/')
 #username = os.environ.get('NEO4J_USERNAME', 'neo4j')
 #password = os.environ.get('NEO4J_PASSWORD', 'tim54p4MS')
 

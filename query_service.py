@@ -26,12 +26,12 @@ class QueryService:
 
             pair_rank = pairer_metric * pairee_metric
             pairings.append({
-                'ingredient': pairee,
-                'rank': pair_rank
+                'ingt': pairee,
+                'score': pair_rank
             })
 
         print('Elapsed time: {0}'.format(time.time() - start))
-        return sorted(pairings, key=lambda pairing: pairing['rank'], reverse=True)
+        return sorted(pairings, key=lambda pairing: pairing['score'], reverse=True)
 
     def get_count(self, *ingredients):
         #TODO raise error on 0 ingredients
@@ -65,8 +65,8 @@ class QueryService:
     #TODO create separate route for initial recommendations?
     def get_initial_recommendations(self):
         counts = self.get_counts()
-        ranked = [{'ingredient': key, 'rank': counts[key]} for key in counts]
-        return sorted(ranked, key=lambda rank: rank['rank'], reverse=True)
+        ranked = [{'ingt': key, 'score': counts[key]} for key in counts]
+        return sorted(ranked, key=lambda rank: rank['score'], reverse=True)
 
 if __name__ == '__main__':
     qs = QueryService()
