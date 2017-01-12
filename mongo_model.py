@@ -9,6 +9,33 @@ COMBINATIONS = config.COMBINATIONS
 client = MongoClient(URL)
 db = client[DATABASE]
 
+def get_precalc_ranked_pairings(pairing_filter, skip, limit, *ingredients):
+    if not pairing_filter:
+        pairing_filter = ''
+    if skip:
+        skip = int(skip)
+    if limit:
+        limit = int(limit)
+
+    ingredients = list(ingredients)
+    ingredients.sort()
+    combo_id = '::'.join(ingredients)
+    result = db[COMBINATIONS].find_one(
+        {
+            "_id": combo_id
+        },
+        {
+            "_id": 0,
+            "and_count": 0,
+            "or_count": 0,
+            "score": 0,
+            "r": 0,
+            "ingredients": 0,
+            "pairings": {
+                "$slice": [skip, limit]
+            }
+        })
+    return list(result['pairings'])
 
 def get_ranked_pairings(pairing_filter, skip, limit, *ingredients):
     if not pairing_filter:

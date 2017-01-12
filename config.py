@@ -2,8 +2,8 @@ DB_URL = "mongodb://localhost:27017/"
 DATABASE = "yummly"
 
 # collection names
-RECIPES = "recipes100k"
-COMBINATIONS = "combinations100k"
+RECIPES = "recipesWAt"
+COMBINATIONS = "combinationsWAt"
 
 # yummly
 APP_ID = "2a6406ac"
