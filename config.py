@@ -1,5 +1,7 @@
-DB_URL = "mongodb://138.197.137.17/"
-DATABASE = "yummly"
+MONGO_HOST = "138.197.137.17"
+MONGO_USER = "admin"
+MONGO_PASS = "spiceWord88"
+MONGO_DATABASE = "yummly"
 
 # collection names
 RECIPES = "recipesTop50k"

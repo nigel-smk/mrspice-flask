@@ -1,8 +1,12 @@
 from pymongo import MongoClient
 import config
 
-URL = config.DB_URL
-DATABASE = config.DATABASE
+URL = "mongodb://{username}:{password}@{host}".format(
+    username=config.MONGO_USER,
+    password=config.MONGO_PASS,
+    host=config.MONGO_HOST
+)
+DATABASE = config.MONGO_DATABASE
 RECIPES = config.RECIPES
 COMBINATIONS = config.COMBINATIONS
 
