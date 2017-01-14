@@ -6,10 +6,7 @@ from mongo_query_service import MongoQueryService
 from recipe_details_service import RecipeDetailsService
 app = Flask(__name__)
 
-app.config['DB_URL'] = "mongodb://localhost:27017/"
-app.config['DATABASE'] = "yummly"
-app.config['RECIPES'] = "recipes"
-app.config['COMBINATIONS'] = "combinations"
+app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', True)
 
 cors = CORS(app) # origins='http://localhost:8100')
 mq_svc = MongoQueryService()
