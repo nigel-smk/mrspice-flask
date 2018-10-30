@@ -48,6 +48,9 @@ db.createUser(
 ## Postman
 - import the postman collection
 
+## Run the API
+- in the console
+    `python api-server.py`
 
 
 #### To investigate
