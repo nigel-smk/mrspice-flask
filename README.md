@@ -38,11 +38,15 @@ db.createUser(
     }
 )
 ```
+- [import the data dump into your database](https://docs.mongodb.com/manual/reference/program/mongorestore/#bin.mongorestore)
+    - you will need to make a request to the project owner for the data dump file
 
 ## Setup your Config
-- 
+- copy the `config_template.py` contents to a file called `config.py`
+    - you will not need the yummly api key to get started so don't worry about it just yet
 
-
+## Postman
+- import the postman collection
 
 
 
