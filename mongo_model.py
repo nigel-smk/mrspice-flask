@@ -1,11 +1,14 @@
 from pymongo import MongoClient
 import config
 
-URL = "mongodb://{username}:{password}@{host}".format(
-    username=config.MONGO_USER,
-    password=config.MONGO_PASS,
-    host=config.MONGO_HOST
-)
+# URL = "mongodb://{username}:{password}@{host}".format(
+#     username=config.MONGO_USER,
+#     password=config.MONGO_PASS,
+#     host=config.MONGO_HOST
+# )
+
+URL = "mongodb://localhost:27017" # TODO make dev user work
+
 DATABASE = config.MONGO_DATABASE
 RECIPES = config.RECIPES
 COMBINATIONS = config.COMBINATIONS

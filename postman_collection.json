@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "654424e0-7015-0487-b051-b30e77ec757d",
+		"name": "MrSpice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pairings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{URL}}/pairings?skip=0&limit=20&ingredient=salt&ingredient=pepper&ingredient=olive oil",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pairings"
+					],
+					"query": [
+						{
+							"key": "skip",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "ingredient",
+							"value": "salt"
+						},
+						{
+							"key": "ingredient",
+							"value": "pepper"
+						},
+						{
+							"key": "ingredient",
+							"value": "olive oil"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

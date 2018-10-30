@@ -3,8 +3,50 @@
 ## mrspice-cli is a command line tool used to pre-process the recipe data. This part of the project is currently closed-source. Feel free to request access to view the repository on bitbucket.
 
 
-#### To investigate
+# Getting Started
 
+## Python Environment Management
+- I recommend installing [conda](https://conda.io/docs/user-guide/install/index.html)
+    - it allows you to create project-specific environments in which you can install packages
+    - kind of similar to npm
+- read the docs on how to [create a new environment and activate it](https://conda.io/docs/user-guide/getting-started.html#managing-envs)
+    - environments are where you "install" packages, similar to npm
+- once you have your environment setup and activated, use `pip` to install the modules in `requirements.txt`
+    - `pip install -r requirements.txt`
+
+## MongoDB
+- [install MongoDB Community Edition](https://docs.mongodb.com/manual/administration/install-community/)
+- [familiarize yourself with the mongo shell](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell)
+    - you will use it to create/view databases and run test queries
+- create a new database (config_template.py defaults to `yummly` for the name)
+```
+use yummly
+```
+- [create a dev user for the database](https://docs.mongodb.com/manual/reference/method/db.createUser/#create-user-with-roles)
+```
+use yummly
+db.createUser(
+    {
+        user: "dev",
+        pwd: "dev",
+        roles: [ 
+            {
+                role: "readWrite", 
+                db: "yummly"
+            }
+        ]
+    }
+)
+```
+
+## Setup your Config
+- 
+
+
+
+
+
+#### To investigate
 Foodpairing by flavour
 http://www.foodpairing.com/en/home
 
